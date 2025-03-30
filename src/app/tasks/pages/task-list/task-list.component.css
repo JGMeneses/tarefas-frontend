@@ -1,0 +1,152 @@
+.task-list {
+    margin: 20px;
+    padding-bottom: 40px; /* Added padding at the bottom */
+    min-height: calc(100vh - 120px); /* Ensures content pushes footer down */
+}
+
+.filters {
+    margin-bottom: 20px; /* Increased bottom margin */
+    padding: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Replaces margin-right for better spacing */
+}
+
+.filters button {
+    padding: 10px 16px; /* Slightly larger padding */
+    cursor: pointer;
+    border: none;
+    border-radius: 6px; /* Slightly more rounded */
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.filters button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.filters button.active {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.error-message,
+.loading-message {
+    color: red;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.error-message {
+    background-color: #ffebee;
+}
+
+.loading-message {
+    color: #007bff;
+    background-color: #e3f2fd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 30px; /* Added more bottom margin */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+th,
+td {
+    padding: 12px 15px; /* Slightly more padding */
+    text-align: left;
+    border: 1px solid #e0e0e0; /* Lighter border */
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+tr:hover td {
+    background-color: #f9f9f9; /* Hover effect for rows */
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap; /* Allows buttons to wrap on small screens */
+}
+
+.btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-complete {
+    background-color: #ff9800;
+    color: white;
+}
+
+.btn-complete:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Status classes */
+.status-in-progress {
+    color: #ff9800;
+    font-weight: 500;
+}
+
+.status-completed {
+    color: #4caf50;
+    font-weight: 500;
+}
+
+.status-pending {
+    color: #f44336;
+    font-weight: 500;
+}
+
+/* Priority classes */
+.priority-high {
+    color: #f44336;
+    font-weight: 600;
+}
+
+.priority-medium {
+    color: #ff9800;
+    font-weight: 500;
+}
+
+.priority-low {
+    color: #4caf50;
+    font-weight: 500;
+}

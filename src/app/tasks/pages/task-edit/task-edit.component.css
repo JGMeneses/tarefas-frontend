@@ -1,0 +1,200 @@
+/* Estilos gerais do container do formulário */
+.task-edit {
+  margin: 20px auto;
+  padding: 25px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  max-width: 700px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Cabeçalho */
+.task-edit h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Grupos de formulário */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #34495e;
+  font-size: 14px;
+}
+
+/* Campos de entrada */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #3498db;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Validação e erros */
+.form-group .error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+}
+
+.form-control.ng-invalid {
+  border-color: #f44336;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #fdecea;
+  border: 1px solid #fadbd8;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Container dos botões */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Estilos base para botões */
+.btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Botão primário (Atualizar) */
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(41, 128, 185, 0.3);
+}
+
+/* Botão secundário (Cancelar) */
+.btn-outline {
+  background-color: transparent;
+  color: #7f8c8d;
+  border: 1px solid #bdc3c7;
+}
+
+.btn-outline:hover {
+  background-color: #f8f9fa;
+  color: #34495e;
+  border-color: #95a5a6;
+}
+
+/* Estados dos botões */
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Loading spinner */
+.btn .spinner {
+  animation: spin 1s linear infinite;
+  font-size: 16px;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .task-edit {
+    margin: 15px;
+    padding: 20px;
+  }
+  
+  .form-buttons {
+    flex-direction: column-reverse;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 14px;
+  }
+  
+  .task-edit h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Melhorias para dropdowns */
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+}
+
+/* Melhorias visuais para campos desabilitados */
+.form-group select[disabled] {
+  background-color: #ececec;
+  cursor: not-allowed;
+  opacity: 0.8;
+}

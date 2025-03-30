@@ -1,0 +1,49 @@
+<div class="task-list">
+    <!-- Filtro de Status -->
+    <div class="filters">
+        <button
+        *ngFor="let status of statusOptions"
+        [ngClass]="{ 'active': currentStatusFilter === status }"
+        (click)="filterTasks(status)">
+        {{ getStatusLabel(status) }}
+      </button>
+    </div>
+  
+    <!-- Rest of your template remains the same -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="loading" class="loading-message">
+      Carregando tarefas...
+    </div>
+  
+    <!-- Tabela de Tarefas -->
+    <table *ngIf="!loading">
+      <thead>
+        <tr>
+          <th *ngFor="let column of displayedColumns">{{ column | titlecase }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td>{{ task.title }}</td>
+          <td>{{ task.description | slice:0:30 }}...</td>
+          <td [ngClass]="getStatusClass(task.status)">
+            {{ getStatusLabel(task.status) }}
+          </td>
+          <td [ngClass]="getPriorityClass(task.priority)">
+            {{ task.priority }}
+          </td>
+          <td>{{ formatDate(task.createdAt) }}</td>
+          <td>{{ formatDate(task.deadline) }}</td>
+          <td class="actions">
+            <button (click)="editTask(task.id)" class="btn btn-edit">Editar</button>
+            <button (click)="markAsCompleted(task.id)" class="btn btn-complete" [disabled]="task.status === 'CONCLUIDA'">
+              Concluir
+            </button>
+            <button (click)="deleteTask(task.id)" class="btn btn-delete">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

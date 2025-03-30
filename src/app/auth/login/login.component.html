@@ -1,0 +1,63 @@
+<div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h2>Bem-vindo</h2>
+        <p>Faça login para continuar</p>
+      </div>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+        <div class="form-group">
+          <label for="username">Usuário</label>
+          <input 
+            type="text" 
+            id="username" 
+            formControlName="username" 
+            required
+            placeholder="Digite seu usuário"
+            [class.invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+          />
+          @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+            <span class="validation-error">Por favor, insira seu usuário</span>
+          }
+        </div>
+  
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password" 
+            required
+            placeholder="Digite sua senha"
+            [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          />
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <span class="validation-error">Por favor, insira sua senha</span>
+          }
+        </div>
+  
+        <div class="form-actions">
+          <button 
+            type="submit" 
+            class="login-button"
+            [disabled]="loginForm.invalid"
+          >
+            Entrar
+          </button>
+        </div>
+  
+        <div class="additional-options">
+          <a href="/forgot-password">Esqueci minha senha</a>
+          <span>•</span>
+          <a href="/register">Criar conta</a>
+        </div>
+      </form>
+  
+      @if (errorMessage()) {
+        <div class="error-message">
+          <i class="error-icon">!</i>
+          {{ errorMessage() }}
+        </div>
+      }
+    </div>
+  </div>

@@ -1,3 +1,31 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/AuthGuard';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { TaskListComponent } from './tasks/pages/task-list/task-list.component';
+import { TaskFormComponent } from './tasks/pages/task-form/task-form.component';
+import { HomeComponent } from './tasks/pages/home/home.component';
+import { TaskEditComponent } from './tasks/pages/task-edit/task-edit.component';
 
-export const routes: Routes = [];
+// Adicione 'export' antes da constante routes
+export const routes: Routes = [
+  // Rotas públicas
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  
+  // Rotas protegidas (requerem autenticação)
+  { 
+    path: 'tasks', 
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'new', component: TaskFormComponent },
+      { path: ':id', component: TaskEditComponent }
+    ]
+  },
+  
+  // Redirecionamentos
+  { path: '', redirectTo: '/tasks', pathMatch: 'full' },
+  { path: '**', redirectTo: '/tasks' } // Página não encontrada
+];
