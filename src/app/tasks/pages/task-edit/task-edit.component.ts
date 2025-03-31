@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../../core/services/task.service';
 import { Task } from '../../../shared/models/task.model';
 import { UserDTO } from '../../../shared/models/DTO/UserDTO';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 type PriorityKey = 'high' | 'medium' | 'low';
 type StatusKey = 'pending' | 'in_progress' | 'completed';
@@ -12,7 +16,15 @@ type StatusKey = 'pending' | 'in_progress' | 'completed';
 @Component({
   selector: 'app-task-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    HeaderComponent,
+    ReactiveFormsModule
+],
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.css']
 })

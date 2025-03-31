@@ -8,7 +8,7 @@ import { Observable, tap, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = `http://localhost:8080/api/auth`; // Ajuste para usar environment, se necessário
+  private apiUrl = `http://localhost:8081/api/auth`; // Ajuste para usar environment, se necessário
 
   constructor(private http: HttpClient) {}
 
@@ -29,12 +29,12 @@ export class AuthService {
   }
 
   // Função de registro
-  register(username: string, password: string): Observable<any> {
-    const credentials = { username, password };
+  register(username: string, password: string, cargo?: string): Observable<any> {
+    const credentials = { username, password, cargo };
     return this.http.post<any>(`${this.apiUrl}/register`, credentials).pipe(
       catchError(error => {
         console.error('Erro ao registrar:', error);
-        return throwError(() => new Error('Falha no registro.'));
+        return throwError(() => new Error(error.error?.message || 'Falha no registro.'));
       })
     );
   }

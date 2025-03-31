@@ -7,17 +7,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TaskService } from '../../../core/services/task.service';
 import { Task } from '../../../shared/models/task.model';
 import { UserDTO } from '../../../shared/models/DTO/UserDTO';
+import { HeaderComponent } from "../../components/header/header.component";
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     RouterModule,
     MatIconModule,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    HeaderComponent,
+    FooterComponent
+],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })

@@ -1,17 +1,15 @@
 <header class="app-header">
     <div class="header-container">
       <div class="logo">
-        <h1 routerLink="/tasks" class="logo-link">My Squad App</h1>
+        <h1 routerLink="/tasks" class="logo-link">Gestor</h1>
       </div>
       
       <nav class="main-nav">
         <ul>
           <li><a routerLink="/my-squad" routerLinkActive="active" #mySquadLink="routerLinkActive" 
-                 [class.active]="mySquadLink.isActive">View My Squad</a></li>
+                 [class.active]="mySquadLink.isActive">Tarefas</a></li>
           <li><a routerLink="/me" routerLinkActive="active" #meLink="routerLinkActive" 
-                 [class.active]="meLink.isActive">My Information</a></li>
-          <li><a routerLink="/all-squads" routerLinkActive="active" #allSquadsLink="routerLinkActive" 
-                 [class.active]="allSquadsLink.isActive">All Squads</a></li>
+                 [class.active]="meLink.isActive">Perfil</a></li>
         </ul>
       </nav>
     </div>

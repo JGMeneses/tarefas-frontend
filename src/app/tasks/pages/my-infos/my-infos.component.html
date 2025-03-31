@@ -5,7 +5,6 @@
   <div class="user-profile-container">
     <div class="profile-header">
       <h2>
-        <mat-icon class="profile-title-icon">account_circle</mat-icon>
         My Profile
       </h2>
     </div>
@@ -62,13 +61,6 @@
           </div>
         </div>
       </div>
-    </div>
-  
-    <div *ngIf="userInfo && !isLoading" class="profile-actions">
-      <button mat-stroked-button (click)="fetchUserInfo()" class="refresh-button">
-        <mat-icon>refresh</mat-icon>
-        Refresh Data
-      </button>
     </div>
   </div>
 </main>

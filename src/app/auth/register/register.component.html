@@ -1,74 +1,75 @@
-<h2>Criar Conta</h2>
-<form [formGroup]="registerForm" (ngSubmit)="register()">
-  <div class="form-group">
-    <label for="username">Usuário</label>
-    <input
-      type="text"
-      id="username"
-      formControlName="username"
-      class="form-control"
-      [class.is-invalid]="registerForm.controls.username.invalid && registerForm.controls.username.touched"
-    />
-    @if (registerForm.controls.username.invalid && registerForm.controls.username.touched) {
-      <div class="invalid-feedback">
-        @if (registerForm.controls.username.errors?.['required']) {
-          <span>Usuário é obrigatório</span>
-        }
-        @if (registerForm.controls.username.errors?.['minlength']) {
-          <span>Mínimo 3 caracteres</span>
-        }
-      </div>
-    }
+<div class="form-container">
+  <div class="form-header">
+    <h2>
+      <mat-icon>person_add</mat-icon>
+      Cadastrar Novo Usuário
+    </h2>
   </div>
 
-  <div class="form-group">
-    <label for="password">Senha</label>
-    <input
-      type="password"
-      id="password"
-      formControlName="password"
-      class="form-control"
-      [class.is-invalid]="registerForm.controls.password.invalid && registerForm.controls.password.touched"
-    />
-    @if (registerForm.controls.password.invalid && registerForm.controls.password.touched) {
-      <div class="invalid-feedback">
-        @if (registerForm.controls.password.errors?.['required']) {
-          <span>Senha é obrigatória</span>
-        }
-        @if (registerForm.controls.password.errors?.['minlength']) {
-          <span>Mínimo 6 caracteres</span>
-        }
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="user-form">
+    <div class="form-field">
+      <label for="username">Nome de Usuário</label>
+      <input type="text" id="username" formControlName="username" required 
+             placeholder="Digite um nome de usuário">
+      <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error-message">
+        Nome de usuário é obrigatório (mínimo 3 caracteres)
       </div>
-    }
-  </div>
-
-  <div class="form-group">
-    <label for="confirmPassword">Confirmar Senha</label>
-    <input
-      type="password"
-      id="confirmPassword"
-      formControlName="confirmPassword"
-      class="form-control"
-      [class.is-invalid]="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.touched"
-    />
-    @if (registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.touched) {
-      <div class="invalid-feedback">
-        <span>Confirmação de senha é obrigatória</span>
-      </div>
-    }
-  </div>
-
-  @if (errorMessage()) {
-    <div class="alert alert-danger">
-      {{ errorMessage() }}
     </div>
-  }
+    
+    <div class="form-field">
+      <label for="password">Senha</label>
+      <input type="password" id="password" formControlName="password" required
+             placeholder="Crie uma senha segura">
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+        Senha é obrigatória (mínimo 6 caracteres)
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="confirmPassword">Confirmar Senha</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" required
+             placeholder="Repita a senha">
+    </div>
+    
+    <div class="form-field">
+      <label for="cargo">Cargo/Função</label>
+      <select id="cargo" formControlName="cargo" required>
+        <option value="" disabled selected>Selecione um cargo</option>
+        <option value="dono">Dono</option>
+        <option value="gerente">Gerente</option>
+        <option value="desenvolvedor">Desenvolvedor</option>
+        <option value="designer">Designer</option>
+      </select>
+      <div *ngIf="registerForm.get('cargo')?.invalid && registerForm.get('cargo')?.touched" class="error-message">
+        Por favor, selecione um cargo
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" formControlName="email" required
+             placeholder="Digite seu e-mail">
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+        Por favor, insira um e-mail válido
+      </div>
+    </div>
 
-  <button
-    type="submit"
-    class="btn btn-primary"
-    [disabled]="registerForm.invalid"
-  >
-    Registrar
-  </button>
-</form>
+    <div class="form-actions">
+      <button type="submit" class="submit-button" [disabled]="registerForm.invalid || isLoading">
+        <mat-icon>how_to_reg</mat-icon>
+        Cadastrar Usuário
+        <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+      </button>
+    </div>
+
+    <div *ngIf="successMessage" class="message success">
+      <mat-icon>check_circle</mat-icon>
+      <span>{{ successMessage }}</span>
+    </div>
+    
+    <div *ngIf="errorMessage" class="message error">
+      <mat-icon>error</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+  </form>
+</div>
