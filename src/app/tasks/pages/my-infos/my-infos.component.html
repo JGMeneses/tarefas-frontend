@@ -1,0 +1,74 @@
+<!-- my-infos.component.html -->
+<app-header></app-header>
+
+<main class="profile-main-content">
+  <div class="user-profile-container">
+    <div class="profile-header">
+      <h2>
+        <mat-icon class="profile-title-icon">account_circle</mat-icon>
+        My Profile
+      </h2>
+    </div>
+  
+    <div *ngIf="error" class="system-message error">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error }}</span>
+      <button mat-stroked-button (click)="fetchUserInfo()">
+        <mat-icon>refresh</mat-icon>
+        Try Again
+      </button>
+    </div>
+    
+    <div *ngIf="isLoading" class="system-message loading">
+      <mat-spinner diameter="24"></mat-spinner>
+      <span>Loading profile information...</span>
+    </div>
+  
+    <div *ngIf="userInfo && !isLoading" class="profile-card">
+      <div class="profile-avatar">
+        <mat-icon class="avatar-icon">account_circle</mat-icon>
+      </div>
+      
+      <div class="profile-details">
+        <div class="detail-row">
+          <mat-icon class="detail-icon">fingerprint</mat-icon>
+          <div class="detail-content">
+            <span class="detail-label">USER ID</span>
+            <span class="detail-value">{{ userInfo.id }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-row">
+          <mat-icon class="detail-icon">person</mat-icon>
+          <div class="detail-content">
+            <span class="detail-label">USERNAME</span>
+            <span class="detail-value">{{ userInfo.username }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-row">
+          <mat-icon class="detail-icon">work_outline</mat-icon>
+          <div class="detail-content">
+            <span class="detail-label">POSITION</span>
+            <span class="detail-value">{{ userInfo.cargo }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-row">
+          <mat-icon class="detail-icon">groups</mat-icon>
+          <div class="detail-content">
+            <span class="detail-label">SQUAD</span>
+            <span class="detail-value">{{ userInfo.squad }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="userInfo && !isLoading" class="profile-actions">
+      <button mat-stroked-button (click)="fetchUserInfo()" class="refresh-button">
+        <mat-icon>refresh</mat-icon>
+        Refresh Data
+      </button>
+    </div>
+  </div>
+</main>

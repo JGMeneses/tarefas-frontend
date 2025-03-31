@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TaskService } from '../../../core/services/task.service';
 import { Task } from '../../../shared/models/task.model';
 import { UserDTO } from '../../../shared/models/DTO/UserDTO';
@@ -9,7 +11,13 @@ import { UserDTO } from '../../../shared/models/DTO/UserDTO';
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    RouterModule,
+    MatIconModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
@@ -22,9 +30,7 @@ export class TaskFormComponent implements OnInit {
 
   @Output() taskCreated = new EventEmitter<void>();
 
-  constructor(
-    private taskService: TaskService,
-  ) {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.loadSquadMembers();
@@ -59,7 +65,7 @@ export class TaskFormComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao cadastrar tarefa:', err);
-        this.errorMessage = 'Erro ao cadastrar tarefa.';
+        this.errorMessage = 'Erro ao cadastrar tarefa. Verifique os dados e tente novamente.';
         this.successMessage = null;
       }
     });

@@ -4,6 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { TaskService } from '../../../core/services/task.service';
 import { Task } from '../../../shared/models/task.model';
 import { AuthService } from '../../../core/services/AuthService';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 // Define the possible status values
 type TaskStatus = 'EM_ANDAMENTO' | 'CONCLUIDA' | 'PENDENTE' | 'TODAS';
@@ -19,7 +21,8 @@ interface StatusMap {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
+    MatProgressSpinnerModule,  // Corrigido para MatProgressSpinnerModule
+    MatIconModule,     // Importa o MatIconModule
   ],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
@@ -94,6 +97,38 @@ export class TaskListComponent implements OnInit {
     }
   }
 
+  selectedTask: any = null;
+
+openTaskModal(task: any) {
+  this.selectedTask = task;
+}
+
+closeTaskModal() {
+  this.selectedTask = null;
+}
+
+  createTask(): void {
+   
+     this.router.navigate(['/tasks/new/']);
+    
+  }
+
+  isDeadlineNear(deadline: string | Date): boolean {
+    if (!deadline) return false;
+    
+    const deadlineDate = new Date(deadline);
+    const today = new Date();
+    
+    // Zerar horas para comparar apenas dias
+    today.setHours(0, 0, 0, 0);
+    deadlineDate.setHours(0, 0, 0, 0);
+    
+    const diffTime = deadlineDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return diffDays <= 3 && diffDays >= 0;
+  }
+
   deleteTask(id: number): void {
     if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
       this.taskService.deleteTask(id).subscribe({
@@ -132,9 +167,14 @@ export class TaskListComponent implements OnInit {
         return '';
     }
   }
-  getStatusLabel(status: TaskStatus): string {
-    if (status === 'TODAS') return 'Todos';
-    return this.statusMap[status].label;
+  
+  getStatusLabel(status: string): string {
+    switch(status) {
+      case 'CONCLUIDA': return 'Concluída';
+      case 'EM_ANDAMENTO': return 'Em Andamento';
+      case 'PENDENTE': return 'Pendente';
+      default: return status;
+    }
   }
   
   getStatusClass(status: TaskStatus): string {
@@ -155,4 +195,14 @@ export class TaskListComponent implements OnInit {
       }
     });
   }
+
+  getStatusIcon(status: string): string {
+    switch(status) {
+      case 'CONCLUIDA': return 'check_circle';
+      case 'EM_ANDAMENTO': return 'autorenew';
+      case 'PENDENTE': return 'schedule';
+      default: return 'help_outline';
+    }
+  }
+
 }

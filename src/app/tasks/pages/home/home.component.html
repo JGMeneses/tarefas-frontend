@@ -1,7 +1,11 @@
-<div class="container">     
-    <app-task-form (taskCreated)="onTaskCreated()"></app-task-form> 
+<app-header></app-header>
 
+<div class="main-content">
+  <div class="container">     
     <div class="task-list-container">
-      <app-task-list #taskList></app-task-list>  <!-- Referência para chamar o loadTasks() -->
+      <app-task-list #taskList></app-task-list>
     </div>
+  </div>
 </div>
+
+<app-footer></app-footer>

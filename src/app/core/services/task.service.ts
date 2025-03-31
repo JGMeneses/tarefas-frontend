@@ -8,8 +8,10 @@ import { UserDTO } from '../../shared/models/DTO/UserDTO';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:8080/api/tasks';
-  private apiUrlSquad = 'http://localhost:8080/api/squads';
+  private apiUrl = 'http://localhost:8081/api/tasks';
+  private apiUrlSquad = 'http://localhost:8081/api/squads';
+  
+
 
   constructor(private http: HttpClient) {}
 
@@ -42,7 +44,6 @@ export class TaskService {
   }
 
   updateTask(id: number, taskData: Partial<Task>): Observable<Task> {
-    // Garante que a data seja enviada no formato correto
     const payload = {
       ...taskData,
       deadline: this.formatDateForApi(taskData.deadline)
@@ -61,11 +62,8 @@ export class TaskService {
   
   private formatDateForApi(date?: Date | string): string | undefined {
     if (!date) return undefined;
-    
-    // Se já for string, assume que está no formato correto
+  
     if (typeof date === 'string') return date;
-    
-    // Converte Date para ISO string (remove a parte do timezone)
     return date.toISOString().split('T')[0];
   }
   deleteTask(id: number): Observable<void> {

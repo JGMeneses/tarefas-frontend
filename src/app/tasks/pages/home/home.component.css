@@ -1,0 +1,10 @@
+.main-content {
+    min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+    padding-bottom: 60px; /* Footer height */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }

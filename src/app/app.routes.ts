@@ -7,6 +7,7 @@ import { TaskListComponent } from './tasks/pages/task-list/task-list.component';
 import { TaskFormComponent } from './tasks/pages/task-form/task-form.component';
 import { HomeComponent } from './tasks/pages/home/home.component';
 import { TaskEditComponent } from './tasks/pages/task-edit/task-edit.component';
+import { MyInfosComponent } from './tasks/pages/my-infos/my-infos.component';
 
 // Adicione 'export' antes da constante routes
 export const routes: Routes = [
@@ -25,6 +26,8 @@ export const routes: Routes = [
     ]
   },
   
+ { path: 'me', component: MyInfosComponent, canActivate: [AuthGuard] },
+
   // Redirecionamentos
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
   { path: '**', redirectTo: '/tasks' } // Página não encontrada
