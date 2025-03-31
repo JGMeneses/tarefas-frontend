@@ -4,12 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../core/services/AuthService';
 import { User } from '../../shared/models/user.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyInfoServices {
-  private apiUrl = 'http://localhost:8081/api';
+  private apiUrl = environment.API_URL;
 
   constructor(
     private http: HttpClient,
@@ -29,10 +30,7 @@ export class MyInfoServices {
 
     return this.http.get<User>(`${this.apiUrl}/auth/me`, { headers })
       .pipe(
-        catchError(error => {
-          console.error('Erro ao obter informações do usuário:', error);
-          return throwError(() => error);
-        })
+        catchError(error => throwError(() => error))
       );
   }
 }

@@ -7,7 +7,6 @@ import { AuthService } from '../../../core/services/AuthService';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 
-// Define the possible status values
 type TaskStatus = 'EM_ANDAMENTO' | 'CONCLUIDA' | 'PENDENTE' | 'TODAS';
 
 interface StatusMap {
@@ -21,8 +20,8 @@ interface StatusMap {
   standalone: true,
   imports: [
     CommonModule,
-    MatProgressSpinnerModule,  // Corrigido para MatProgressSpinnerModule
-    MatIconModule,     // Importa o MatIconModule
+    MatProgressSpinnerModule,  
+    MatIconModule,     
   ],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
@@ -119,7 +118,7 @@ closeTaskModal() {
     const deadlineDate = new Date(deadline);
     const today = new Date();
     
-    // Zerar horas para comparar apenas dias
+
     today.setHours(0, 0, 0, 0);
     deadlineDate.setHours(0, 0, 0, 0);
     
@@ -182,7 +181,7 @@ closeTaskModal() {
     return this.statusMap[status].class;
   }
 
-  // Update markAsCompleted to use the string status
+  
   markAsCompleted(taskId?: number): void {
     if (!taskId) return;
     this.taskService.updateTaskStatus(taskId, 2).subscribe({

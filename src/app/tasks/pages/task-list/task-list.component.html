@@ -2,34 +2,28 @@
 
 
 <div class="task-container">
-  <!-- Controles superiores -->
   <div class="task-controls">
     <div class="filter-controls">
-      <!-- Botão "Todas" -->
       <button [class.active]="currentStatusFilter === 'TODAS'" (click)="filterTasks('TODAS')">
         <mat-icon>list</mat-icon>
         Todas
       </button>
       
-      <!-- Botão "Pendente" -->
       <button [class.active]="currentStatusFilter === 'PENDENTE'" (click)="filterTasks('PENDENTE')">
         <mat-icon>schedule</mat-icon>
         Pendente
       </button>
       
-      <!-- Botão "Em Andamento" -->
       <button [class.active]="currentStatusFilter === 'EM_ANDAMENTO'" (click)="filterTasks('EM_ANDAMENTO')">
         <mat-icon>autorenew</mat-icon>
         Em Andamento
       </button>
       
-      <!-- Botão "Concluída" -->
       <button [class.active]="currentStatusFilter === 'CONCLUIDA'" (click)="filterTasks('CONCLUIDA')">
         <mat-icon>check_circle</mat-icon>
         Concluída
       </button>
       
-      <!-- Botão de Nova Tarefa -->
       <button class="create-task-btn" (click)="createTask()">
         <mat-icon>add</mat-icon>
         Nova Tarefa
@@ -37,7 +31,6 @@
     </div>
   </div>
 
-  <!-- Mensagens do sistema -->
   <div *ngIf="errorMessage" class="system-message error">
     <mat-icon>error</mat-icon>
     <span>{{ errorMessage }}</span>
@@ -48,7 +41,6 @@
     <span>Carregando tarefas...</span>
   </div>
 
-  <!-- Tabela de Tarefas -->
   <div *ngIf="!loading && filteredTasks.length > 0" class="task-table-wrapper">
     <table class="task-table">
       <thead>
@@ -93,7 +85,6 @@
     </table>
   </div>
 
-  <!-- Estado vazio -->
   <div *ngIf="!loading && filteredTasks.length === 0" class="empty-state">
     <mat-icon class="empty-icon">assignment</mat-icon>
     <h3>Nenhuma tarefa encontrada</h3>
@@ -104,7 +95,6 @@
     </button>
   </div>
 
-  <!-- Modal de Detalhes da Tarefa - COMPLETAMENTE REESTILIZADO -->
   <div class="modal-overlay" [class.visible]="selectedTask">
     <div class="task-modal" *ngIf="selectedTask">
       <button class="close-modal" (click)="closeTaskModal()">

@@ -3,16 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../../shared/models/task.model';
 import { UserDTO } from '../../shared/models/DTO/UserDTO';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:8081/api/tasks';
-  private apiUrlSquad = 'http://localhost:8081/api/squads';
+  private apiUrl = `${environment.API_URL}/tasks`;
+  private apiUrlSquad = `${environment.API_URL}/squads`;
   
-
-
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -54,18 +53,18 @@ export class TaskService {
       payload,
       { headers: this.getAuthHeaders() }
     );
-
-    }
-    checkUserInSquad(username: string, squadId: number): Observable<boolean> {
-      return this.http.get<boolean>(`${this.apiUrl}/users/check?username=${username}&squadId=${squadId}`);
-    }
+  }
   
+  checkUserInSquad(username: string, squadId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/users/check?username=${username}&squadId=${squadId}`);
+  }
+
   private formatDateForApi(date?: Date | string): string | undefined {
     if (!date) return undefined;
-  
     if (typeof date === 'string') return date;
     return date.toISOString().split('T')[0];
   }
+
   deleteTask(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
@@ -82,6 +81,6 @@ export class TaskService {
     return this.http.get<UserDTO[]>(
       `${this.apiUrlSquad}/my-squad/members`, 
       { headers: this.getAuthHeaders() }
-     );
+    );
   }
 }

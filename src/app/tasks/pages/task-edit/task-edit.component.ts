@@ -8,7 +8,6 @@ import { UserDTO } from '../../../shared/models/DTO/UserDTO';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HeaderComponent } from '../../components/header/header.component';
-import { FooterComponent } from '../../components/footer/footer.component';
 
 type PriorityKey = 'high' | 'medium' | 'low';
 type StatusKey = 'pending' | 'in_progress' | 'completed';
@@ -170,8 +169,6 @@ export class TaskEditComponent implements OnInit {
   updateTask() {
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
-      
-      // Verifica especificamente o erro do responsável
       if (this.taskForm.get('responsible')?.errors?.['invalidResponsible']) {
         this.errorMessage = 'Por favor, selecione um responsável válido para o squad';
       }
@@ -185,7 +182,7 @@ export class TaskEditComponent implements OnInit {
     const formData = this.taskForm.value;
     const taskData: Partial<Task> = {
       title: formData.title,
-      description: formData.description || undefined, // Converte empty string para undefined
+      description: formData.description || undefined,
       responsible: formData.responsible,
       priority: this.priorityMap[formData.priority as PriorityKey],
       status: this.statusMap[formData.status as StatusKey],

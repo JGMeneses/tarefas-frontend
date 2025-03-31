@@ -13,11 +13,11 @@ import { FooterComponent } from "../../components/footer/footer.component";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  @ViewChild(TaskListComponent) taskList!: TaskListComponent;  // Acessa o componente de lista
+  @ViewChild(TaskListComponent) taskList!: TaskListComponent;
 
   constructor(private taskService: TaskService) {}
 
   onTaskCreated(): void {
-    this.taskList.loadTasks();  // Chama a atualização da lista ao cadastrar uma nova tarefa
+    this.taskList.loadTasks(); 
   }
 }
