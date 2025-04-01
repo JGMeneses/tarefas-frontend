@@ -1,105 +1,95 @@
-# TarefasFrontend
+# Frontend - Gerenciador de Tarefas
 
-Este é um sistema desenvolvido em **Angular** para gerenciamento de tarefas (**Tasks**), que permite realizar o **CRUD completo** de tarefas, com separação por **squads**. No momento do cadastro, o usuário informa qual é seu **cargo** e a qual **squad (time)** pertence.
-
-O backend foi desenvolvido em **Java Spring Boot** e está **dockerizado**, sendo necessário rodá-lo antes de iniciar o frontend.
+Este é o frontend da aplicação **Gerenciador de Tarefas**, desenvolvido utilizando **Angular 19.2.5**. O sistema permite a criação, atualização, remoção e listagem de tarefas. Ele se comunica com o backend, que deve estar rodando para que a aplicação funcione corretamente.
 
 ## Tecnologias Utilizadas
 
 - **Frontend:** Angular 19.2.5
-- **Backend:** Java 21  & Spring Boot
-- **Banco de Dados:** PostgreSQL (Docker)
-- **Gerenciador de Pacotes:** npm
+- **Backend:** Java 21 e Spring Boot 3 (com Docker)
+- **Autenticação:** JWT (JSON Web Token)
+- **Estilos:** CSS/SCSS
 
 ---
 
-## Como Rodar o Projeto
+## Como Rodar o Projeto Frontend
 
-### 1. Configurar e Rodar o Backend (Spring Boot)
+### 1. Configuração do Backend
 
-1. Certifique-se de ter o **Docker** e o **Docker Compose** instalados.
-2. No terminal, navegue até o diretório do backend:
+Antes de rodar o frontend, **garanta que o backend esteja em execução**. Para isso, siga os passos abaixo no README do backend:
 
-   ```bash
-   cd caminho/do/backend
-   ```
-3. Execute o seguinte comando para subir o backend e o banco de dados:
+1. **Configuração do banco de dados e backend com Docker**
+   - Defina as variáveis de ambiente necessárias.
+   - Suba o backend com Docker Compose utilizando o comando:
+     ```bash
+     docker-compose up --build
+     ```
+   - O backend estará disponível em [http://localhost:8081](http://localhost:8081/).
 
-   ```bash
-   docker-compose up -d
-   ```
-4. O backend estará rodando em `http://localhost:8081/`
+2. **Verifique a documentação da API no Swagger:**
+   - [http://localhost:8081/swagger-ui/index.html#/](http://localhost:8081/swagger-ui/index.html#/)
 
 ---
 
-### 2. Rodar o Frontend (Angular)
+### 2. Rodar o Frontend
 
-1. Certifique-se de ter o **Node.js** instalado (recomenda-se a versão LTS mais recente).
-2. Instale as dependências do projeto Angular:
+1. **Instale o Node.js** (recomenda-se a versão LTS mais recente).
+
+2. **Instale as dependências do projeto Angular:**
+
+   Navegue até o diretório do projeto frontend e instale as dependências com:
 
    ```bash
    npm install
-   ```
+
 3. Inicie o servidor de desenvolvimento:
+   ```bash 
+    ng serve
+4. Acesse a aplicação no navegador:
 
-   ```bash
-   ng serve
-   ```
-4. Acesse o frontend no navegador em `http://localhost:4200/`.
+Abra o navegador e acesse o frontend em http://localhost:4200.
 
----
 
-## Scripts Úteis
+## Funcionalidades Implementadas
+A aplicação permite que o usuário execute as seguintes operações:
 
-### Criar um Novo Componente
+Criar uma tarefa com título, descrição, responsável, prioridade e deadline.
 
-```bash
-ng generate component nome-do-componente
-```
+Atualizar uma tarefa.
 
-### Criar um Novo Serviço
+Remover uma tarefa.
 
-```bash
-ng generate service nome-do-servico
-```
+Listar as tarefas existentes.
 
-### Rodar Testes Unitários
+Estrutura do Projeto
+📂 Frontend
 
-```bash
-ng test
-```
+    📁 src/app/auth → Módulo de autenticação (login).
 
-### Criar Build para Produção
+    📁 src/app/core → Funcionalidades essenciais e compartilhadas.
 
-```bash
-ng build --configuration production
-```
+      📁 guards → Proteção de rotas (guarda de acesso).
 
----
+      📁 interceptors → Interceptação de requisições HTTP.
 
-## Estrutura do Projeto
+      📁 services → Serviços utilizados por toda a aplicação.
 
-📂 **TarefasFrontend**
-- 📁 src/app/auth → Módulo de autenticação
-- 📁 src/app/core → Contém funcionalidades essenciais do projeto
-  - 📁 guards → Guards para proteger rotas
-  - 📁 interceptors → Interceptores para manipulação de requisições HTTP
-  - 📁 services → Serviços essenciais compartilhados
-- 📁 src/app/shared → Recursos compartilhados entre os módulos
-  - 📁 DTO → Objetos de transferência de dados
-  - 📁 models → Modelos de dados
-- 📁 src/app/tasks → Módulo principal do sistema
-  - 📁 components → Componentes específicos de tarefas
-    - 📁 footer → Rodapé do sistema
-    - 📁 header → Cabeçalho do sistema
-  - 📁 pages → Páginas do sistema
-- 📁 src/environments → Configurações de ambiente (dev e prod)
+    📁 src/app/shared → Componentes e recursos compartilhados.
 
----
+      📁 DTO → Objetos de Transferência de Dados.
 
-## Contato
+      📁 models → Modelos de dados.
 
+📁 src/app/tasks → Módulo principal para gerenciamento de tarefas.
+
+    📁 components → Componentes reutilizáveis, como rodapé e cabeçalho.
+
+    📁 footer → Rodapé da aplicação.
+
+    📁 header → Cabeçalho da aplicação.
+
+    📁 pages → Páginas para listagem, criação, edição e remoção de tarefas.
+
+Contato
 Caso tenha alguma dúvida ou sugestão, fique à vontade para entrar em contato!
 
-🚀 **Projeto desenvolvido por João Meneses**.
-
+🚀 Projeto desenvolvido por João Meneses.
