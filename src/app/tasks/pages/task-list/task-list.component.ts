@@ -6,6 +6,9 @@ import { Task } from '../../../shared/models/task.model';
 import { AuthService } from '../../../core/services/AuthService';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 type TaskStatus = 'EM_ANDAMENTO' | 'CONCLUIDA' | 'PENDENTE' | 'TODAS';
 
@@ -21,7 +24,10 @@ interface StatusMap {
   imports: [
     CommonModule,
     MatProgressSpinnerModule,  
-    MatIconModule,     
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
@@ -32,7 +38,8 @@ export class TaskListComponent implements OnInit {
   loading = true;
   errorMessage: string | null = null;
   currentStatusFilter: TaskStatus = 'TODAS';
-  displayedColumns: string[] = ['title', 'description', 'status', 'priority', 'createdAt', 'deadline', 'actions'];
+  searchTerm: string = '';
+  displayedColumns: string[] = ['title', 'description', 'status', 'priority', 'createdAt', 'deadline', 'responsible', 'actions'];
   statusOptions: TaskStatus[] = ['TODAS', 'EM_ANDAMENTO', 'CONCLUIDA', 'PENDENTE'];
 
   statusMap: StatusMap = {
@@ -81,12 +88,30 @@ export class TaskListComponent implements OnInit {
     this.applyFilter();
   }
 
+  onSearchChange(): void {
+    this.applyFilter();
+  }
+
   private applyFilter(): void {
-    if (this.currentStatusFilter === 'TODAS') {
-      this.filteredTasks = [...this.tasks];
-    } else {
-      this.filteredTasks = this.tasks.filter(task => task.status === this.currentStatusFilter);
+    let filtered = [...this.tasks];
+    
+    // Apply status filter
+    if (this.currentStatusFilter !== 'TODAS') {
+      filtered = filtered.filter(task => task.status === this.currentStatusFilter);
     }
+    
+    // Apply search filter
+    if (this.searchTerm) {
+      const term = this.searchTerm.toLowerCase();
+      filtered = filtered.filter(task => 
+        task.title.toLowerCase().includes(term) || 
+        task.description?.toLowerCase().includes(term) ||
+        task.status.toLowerCase().includes(term) ||
+        (task.responsible && task.responsible.toLowerCase().includes(term))
+      );
+    }
+    
+    this.filteredTasks = filtered;
   }
 
 
@@ -117,8 +142,6 @@ closeTaskModal() {
     
     const deadlineDate = new Date(deadline);
     const today = new Date();
-    
-
     today.setHours(0, 0, 0, 0);
     deadlineDate.setHours(0, 0, 0, 0);
     
@@ -181,7 +204,6 @@ closeTaskModal() {
     return this.statusMap[status].class;
   }
 
-  
   markAsCompleted(taskId?: number): void {
     if (!taskId) return;
     this.taskService.updateTaskStatus(taskId, 2).subscribe({

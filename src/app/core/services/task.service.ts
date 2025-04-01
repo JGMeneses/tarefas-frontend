@@ -3,14 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../../shared/models/task.model';
 import { UserDTO } from '../../shared/models/DTO/UserDTO';
-import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = `${environment.API_URL}/tasks`;
-  private apiUrlSquad = `${environment.API_URL}/squads`;
+  private apiUrl = `http://localhost:8081/api/tasks`;
+  private apiUrlSquad = `http://localhost:8081/api/squads`;
   
   constructor(private http: HttpClient) {}
 

@@ -1,8 +1,17 @@
 
-
-
 <div class="task-container">
   <div class="task-controls">
+    <div class="search-control">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Pesquisar tarefas</mat-label>
+        <input matInput 
+               [(ngModel)]="searchTerm" 
+               (input)="onSearchChange()" 
+               placeholder="Pesquise por título, descrição, status ou responsável">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
     <div class="filter-controls">
       <button [class.active]="currentStatusFilter === 'TODAS'" (click)="filterTasks('TODAS')">
         <mat-icon>list</mat-icon>
@@ -50,6 +59,7 @@
           <th>Descrição</th>
           <th>Prioridade</th>
           <th>Prazo</th>
+          <th>Responsável</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -67,6 +77,9 @@
           </td>
           <td [class.deadline-warning]="isDeadlineNear(task.deadline)">
             {{ formatDate(task.deadline) }}
+          </td>
+          <td>
+            {{ task.responsible || 'Não atribuído' }}
           </td>
           <td class="action-buttons">
             <button mat-icon-button (click)="editTask(task.id); $event.stopPropagation()" matTooltip="Editar tarefa" class="action-icon">

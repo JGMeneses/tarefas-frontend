@@ -4,13 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../core/services/AuthService';
 import { User } from '../../shared/models/user.models';
-import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyInfoServices {
-  private apiUrl = environment.API_URL;
+  private apiUrl = `http://localhost:8081/api`;
 
   constructor(
     private http: HttpClient,
